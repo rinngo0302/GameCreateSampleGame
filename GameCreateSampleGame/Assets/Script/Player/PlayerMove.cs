@@ -22,6 +22,9 @@ public class PlayerMove : MonoBehaviour
         float x = transform.position.x;
         float y = transform.position.y;
 
+        if (Input.GetKey(KeyCode.Space))
+            Debug.Log("Space");
+
         if (Input.GetKey(KeyCode.A) && x >= -RANGE_W)
         {
             transform.Translate(new Vector3(-_speedX, 0, 0) * Time.deltaTime);
@@ -38,18 +41,5 @@ public class PlayerMove : MonoBehaviour
         {
             transform.Translate(new Vector3(0, -_speedY, 0) * Time.deltaTime);
         }
-    }
-
-    private bool isInField()
-    {
-        float x = transform.position.x;
-        float y = transform.position.y;
-
-        if (x >= -RANGE_W && x <= RANGE_W && y >= -RANGE_H && y >= RANGE_H)
-        {
-            return true;
-        }
-
-        return false;
     }
 }
