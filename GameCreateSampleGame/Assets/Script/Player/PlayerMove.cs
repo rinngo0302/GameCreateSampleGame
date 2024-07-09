@@ -10,10 +10,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float _speedX;
     [SerializeField] float _speedY;
 
+    private GameObject _bulletMakerObject;
+    private BulletMaker _bulletMakerScript;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _bulletMakerObject = GameObject.Find("BulletMaker");
+        _bulletMakerScript = _bulletMakerObject.GetComponent<BulletMaker>();
     }
 
     // Update is called once per frame
@@ -21,9 +25,6 @@ public class PlayerMove : MonoBehaviour
     {
         float x = transform.position.x;
         float y = transform.position.y;
-
-        if (Input.GetKey(KeyCode.Space))
-            Debug.Log("Space");
 
         if (Input.GetKey(KeyCode.A) && x >= -RANGE_W)
         {
@@ -40,6 +41,11 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(KeyCode.S) && y >= -RANGE_H)
         {
             transform.Translate(new Vector3(0, -_speedY, 0) * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            _bulletMakerScript.createBullet();
         }
     }
 }
